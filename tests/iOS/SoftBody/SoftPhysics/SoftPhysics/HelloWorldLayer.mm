@@ -128,57 +128,22 @@ enum {
 }
 
 // Uncomment to see debug drawing
-//-(void) draw
-//{
-//	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-//	// Needed states:  GL_VERTEX_ARRAY, 
-//	// Unneeded states: GL_TEXTURE_2D, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-//	glDisable(GL_TEXTURE_2D);
-//	glDisableClientState(GL_COLOR_ARRAY);
-//	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-//	
-//	world->DrawDebugData();
-//	
-//	// restore default GL states
-//	glEnable(GL_TEXTURE_2D);
-//	glEnableClientState(GL_COLOR_ARRAY);
-//	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-//
-//}
-
--(void) addNewSpriteWithCoords:(CGPoint)p
+-(void) draw
 {
-	CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
-	CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
+	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+	// Needed states:  GL_VERTEX_ARRAY, 
+	// Unneeded states: GL_TEXTURE_2D, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+	glDisable(GL_TEXTURE_2D);
+	glDisableClientState(GL_COLOR_ARRAY);
+	//glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	
-	//We have a 64x64 sprite sheet with 4 different 32x32 images.  The following code is
-	//just randomly picking one of the images
-	int idx = (CCRANDOM_0_1() > .5 ? 0:1);
-	int idy = (CCRANDOM_0_1() > .5 ? 0:1);
-	CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(32 * idx,32 * idy,32,32)];
-	[batch addChild:sprite];
+	world->DrawDebugData();
 	
-	sprite.position = ccp( p.x, p.y);
-	
-	// Define the dynamic body.
-	//Set up a 1m squared box in the physics world
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
+	// restore default GL states
+	glEnable(GL_TEXTURE_2D);
+	glEnableClientState(GL_COLOR_ARRAY);
+	//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
-	bodyDef.userData = sprite;
-	b2Body *body = world->CreateBody(&bodyDef);
-	
-	// Define another box shape for our dynamic body.
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
-	
-	// Define the dynamic body fixture.
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;	
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
-	body->CreateFixture(&fixtureDef);
 }
 
 

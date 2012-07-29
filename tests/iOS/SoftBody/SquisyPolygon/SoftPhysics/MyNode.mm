@@ -29,7 +29,7 @@
     // Center is the position of circle that is in the center
     b2Vec2 center = b2Vec2(240/PTM_RATIO, 160/PTM_RATIO);
     b2CircleShape circleShape;
-    circleShape.m_radius = 0.55f;// small circle
+    circleShape.m_radius = 0.49f;// small circle
     
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &circleShape;
@@ -41,7 +41,7 @@
     float deltaAngle = (2.f * M_PI) / NUM_SEGMENTS;
     
     // Radius of the wheel
-    float radius = 50;
+    float radius = 80;
     
     // Need to store the bodies so that we can refer
     // back to it when we connect the joints

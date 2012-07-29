@@ -9,7 +9,7 @@
 #import "cocos2d.h"
 #import "MyNode.h"
 
-#define PTM_RATIO 32.f
+#define PTM_RATIO 42.f
 
 @implementation MyNode
 
@@ -25,7 +25,7 @@
     // Center is the position of the circle that is in the center (inner circle)
     b2Vec2 center = b2Vec2(240/PTM_RATIO, 160/PTM_RATIO);
     b2CircleShape circleShape;
-    circleShape.m_radius = 0.1f;
+    circleShape.m_radius = 0.49f;
     
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &circleShape;
@@ -37,7 +37,7 @@
     deltaAngle = (2.f * M_PI) / NUM_SEGMENTS;
     
     // Radius of the wheel
-    float radius = 50;
+    float radius = 80;
 
     // Need to store the bodies so that we can refer back
     // to it when we connect the joints

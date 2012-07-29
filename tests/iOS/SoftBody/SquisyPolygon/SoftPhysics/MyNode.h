@@ -21,7 +21,7 @@ static inline Vertex2D Vertex2DMake(GLfloat inX, GLfloat inY) {
     return ret;
 }
 
-#define NUM_SEGMENTS 50
+#define NUM_SEGMENTS 30
 
 @interface MyNode : CCNode {
     Vertex2D vertices[4];
